@@ -6,6 +6,7 @@ using UnityEngine.Windows;
 using System.IO;
 using System.Linq;
 using File = System.IO.File;
+using System.Collections.Generic;
 
 namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
 {
@@ -14,28 +15,39 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
         public GridFillWords LoadModel(int index)
         {
             //напиши реализацию не меняя сигнатуру функции
-
             try
             {
-                var levelNum = index - 1;
-
                 string[] levelsList = File.ReadAllLines("Assets/App/Resources/Fillwords/pack_0.txt");
                 string[] wordsList = File.ReadAllLines("Assets/App/Resources/Fillwords/words_list.txt");
 
-                var levelInfo = levelsList[levelNum].Split(' ');
+                var levelInfo = levelsList[index-1].Split(' ');
 
                 //словарь номер слова - номера букв слова
-                Dictionary<int, int[]> levelWords = new Dictionary<int, int[]>();
+                var levelWords = new Dictionary<int, int[]>();
 
                 for (int i = 0; i < levelInfo.Length / 2; i++)
                 {
-                    int wordNum = int.Parse(levelInfo[i * 2]);
-                    var wordLetters = levelInfo[i * 2 + 1].Split(';').Select(Int32.Parse).ToArray();
-
-                    levelWords.Add(wordNum, wordLetters);
+                    var wordNum = int.Parse(levelInfo[i * 2]);
+                    var wordLettersNums = levelInfo[i * 2 + 1].Split(';').Select(Int32.Parse).ToArray();
+                    levelWords.Add(wordNum, wordLettersNums);
                 }
-                
-                
+
+                //массивы букв на карте
+                var gridLetters = new List<char[]>();
+                foreach (var key in levelWords.Keys)
+                {
+                    var word = wordsList[key]; 
+                    var letterNums = levelWords[key];
+                    char[] letters = new char[letterNums.Length];
+                    
+                    //меняем порядок букв в слове
+                    for (int i = 0; i <= letterNums.Length; i++)
+                    {
+                        letters[i] = word[letterNums[i]];
+                    }
+                    gridLetters.Add(letters);
+                }
+
             }
             catch (Exception e)
             {
