@@ -32,20 +32,24 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
                     levelWords.Add(wordNum, wordLettersNums);
                 }
 
-                //массивы букв на карте
-                var gridLetters = new List<char[]>();
+                //устанавливаем размерность грида
+                Vector2Int gridSize = new Vector2Int(levelWords.Keys.Count, levelWords.Keys.Count);
+                GridFillWords gridFillWords = new GridFillWords(gridSize);
+                
+                //написть как заполняем грид букваи
                 foreach (var key in levelWords.Keys)
                 {
                     var word = wordsList[key]; 
                     var letterNums = levelWords[key];
-                    char[] letters = new char[letterNums.Length];
+                    
                     
                     //меняем порядок букв в слове
                     for (int i = 0; i <= letterNums.Length; i++)
                     {
-                        letters[i] = word[letterNums[i]];
+                        CharGridModel letter = new CharGridModel(word[letterNums[i]]);
+                        //занести букву в грид
                     }
-                    gridLetters.Add(letters);
+                    
                 }
 
             }
