@@ -10,50 +10,58 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
     {
         private class CellMove
         {
-            public Vector2Int position;
-            public CellMove previousMove;
+            public Vector2Int Position;
+            public CellMove PreviousMove;
 
             public CellMove(Vector2Int position)
             {
-                this.position = this.position;
-                this.previousMove = null;
+                Position = position;
+                PreviousMove = null;
             }
 
             public CellMove(Vector2Int position, CellMove previousMove)
             {
-                this.position = position;
-                this.previousMove = previousMove;
+                Position = position;
+                PreviousMove = previousMove;
             }
         }
+
         public List<Vector2Int> FindPath(ChessUnitType unit, Vector2Int from, Vector2Int to, ChessGrid grid)
         {
             //напиши реализацию не меняя сигнатуру функции
-            
+
             var color = grid.Get(from).PieceModel.Color;
-            
+
             Queue<CellMove> movesQueue = new Queue<CellMove>();
             movesQueue.Enqueue(new CellMove(from));
 
             List<CellMove> visitedCells = new List<CellMove>();
             visitedCells.Add(new CellMove(from));
 
-            while (movesQueue.Count>0)
+            while (movesQueue.Count > 0)
             {
                 CellMove currentMove = movesQueue.Dequeue();
 
-                if (currentMove.position == to)
+                if (currentMove.Position == to)
                 {
                     List<Vector2Int> path = new List<Vector2Int>();
                     while (currentMove != null)
                     {
-                        path.Add(currentMove.position);
-                        currentMove = currentMove.previousMove;
+                        path.Add(currentMove.Position);
+                        currentMove = currentMove.PreviousMove;
                     }
+
                     path.Reverse();
+                    path.RemoveAt(0); // изменить?
+                    foreach (var vec in path)
+                    {
+                        Debug.Log(vec.x + "," + vec.y);
+                    }
+
                     return path;
                 }
 
-                List<CellMove> possibleMoves = PossibleChessMoves(color, unit, from, grid.Size, currentMove);
+                List<CellMove> possibleMoves = PossibleChessMoves(color, unit, from, grid, currentMove);
 
                 foreach (var move in possibleMoves)
                 {
@@ -64,32 +72,67 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
                     }
                 }
             }
+
             return new List<Vector2Int>();
         }
 
-        private List<CellMove> PossibleChessMoves(ChessUnitColor color,ChessUnitType type, Vector2Int startPosition, Vector2Int gridSize, CellMove previousMove)
+        private List<CellMove> PossibleChessMoves(ChessUnitColor color, ChessUnitType type, Vector2Int startPosition,
+            ChessGrid grid, CellMove previousMove)
         {
+            var gridSize = grid.Size;
             var moves = new List<CellMove>();
+            int x;
+            int y;
             switch (type)
             {
                 case ChessUnitType.Pon:
                 {
                     if (color == ChessUnitColor.White)
                     {
-                        if (startPosition.y + 1 <= gridSize.y) 
-                            moves.Add(new CellMove(new Vector2Int(startPosition.x, startPosition.y+1), previousMove));
+                        x = startPosition.x;
+                        y = startPosition.y + 1;
+
+                        if (y <= gridSize.y && grid.Get(x, y) == null)
+                        {
+                            moves.Add(new CellMove(new Vector2Int(x, y), previousMove));
+                        }
                     }
                     else
                     {
-                        if (startPosition.y - 1 > 0)
+                        x = startPosition.x;
+                        y = startPosition.y - 1;
+                        if (y > 0 && grid.Get(x, y) == null)
                         {
-                            moves.Add(new CellMove(new Vector2Int(startPosition.x, startPosition.y-1), previousMove));
+                            moves.Add(new CellMove(new Vector2Int(x, y), previousMove));
+                        }
+                    }
+                    break;
+                }
+                case ChessUnitType.King:
+                {
+                    for (int dx = -1; dx < 2; dx++)
+                    {
+                        for (int dy = -1; dy < 2; dy++)
+                        {
+                            x = startPosition.x + dx;
+                            y = startPosition.y + dy;
+                            if (x <= gridSize.x && y <= gridSize.y &&
+                                grid.Get(x, y) == null && dx + dy != 0)
+                            {
+                                moves.Add(new CellMove(new Vector2Int(x, y), previousMove));
+                            }
                         }
                     }
                     break;
                 }
             }
 
+            /*
+            foreach (var move in moves)
+            {
+                Debug.Log("("+move.position.x+","+move.position.y+")");
+            }
+            */
             return moves;
         }
     }
