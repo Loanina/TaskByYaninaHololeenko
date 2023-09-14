@@ -398,6 +398,8 @@
 "Assets/App/Scripts/Libs/BaseView/MonoViewUI.cs"
 "Assets/App/Scripts/Libs/Factory/IFactory.cs"
 "Assets/App/Scripts/Libs/Factory/Mono/FactoryMonoPrefab.cs"
+"Assets/App/Scripts/Libs/FilesLoader/ILoader.cs"
+"Assets/App/Scripts/Libs/FilesLoader/Loader.cs"
 "Assets/App/Scripts/Libs/Installer/IInitializable.cs"
 "Assets/App/Scripts/Libs/Installer/IUpdatable.cs"
 "Assets/App/Scripts/Libs/Installer/MonoContext.cs"

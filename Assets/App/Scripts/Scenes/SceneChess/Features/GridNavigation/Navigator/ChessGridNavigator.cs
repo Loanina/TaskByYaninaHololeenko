@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.GridMatrix;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.Types;
 using UnityEngine;
@@ -106,6 +105,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
                             moves.Add(new CellMove(new Vector2Int(x, y), previousMove));
                         }
                     }
+
                     break;
                 }
                 case ChessUnitType.King:
@@ -123,6 +123,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
                             }
                         }
                     }
+
                     break;
                 }
             }

@@ -82,6 +82,7 @@
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\ProviderChessLevel\LevelChessInfoSerializable.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\SharedViews\ItemSelector\ViewItemSelector.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\ChessField\View\ContainerUnits\Animator\AnimatorViewChessUnit.cs" />
+     <Compile Include="Assets\App\Scripts\Libs\FilesLoader\Loader.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\ProjectSettings\Installers\InstallerProjectSettings.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\Models\Level\LevelModel.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridInput\ContainerFieldInput.cs" />
@@ -162,6 +163,7 @@
      <Compile Include="Assets\App\Scripts\Libs\BaseView\MonoViewUI.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\GameCore\Models\ContainerUpdatable.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneFillwords\States\StateRestartFillwords.cs" />
+     <Compile Include="Assets\App\Scripts\Libs\FilesLoader\ILoader.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\App\Scripts\Infrastructure\ProjectSettings" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -283,6 +285,7 @@
      <Folder Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\View" />
      <Folder Include="Assets\Resources" />
      <Folder Include="Assets\App\Scripts\Libs\Systems" />
+     <Folder Include="Assets\App\Scripts\Libs\FilesLoader" />
      <Folder Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level" />
      <Folder Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\View\ViewField\ViewCharInput\Animator" />
      <Folder Include="Assets\App\Scripts\Scenes\SceneChess\Features" />
