@@ -45,6 +45,7 @@
      <Compile Include="Assets\App\Scripts\Scenes\SceneFillwords\Features\FillwordModels\View\ViewGridLetters\ViewGridLetters.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\SharedViews\ItemSelector\IViewItemSelector.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\LevelSelection\IServiceLevelSelection.cs" />
+     <Compile Include="Assets\App\Scripts\Libs\FilesLoader\ILoader.cs" />
      <Compile Include="Assets\App\Scripts\Libs\SceneManagement\ISceneNavigator.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\FieldCamera\ViewCamera\ViewCamera.cs" />
      <Compile Include="Assets\App\Scripts\Libs\Installer\MonoInstaller.cs" />
@@ -92,6 +93,7 @@
      <Compile Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\BuilderLevelModel\ProviderWordLevel\IProviderWordLevel.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\ChessField\Container\ContainerChessLevel.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\GameCore\Commands\SwitchLevel\CommandSwitchLevelState.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitMoveProvider.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\BuilderLevelModel\ProviderWordLevel\ProviderWordLevel.cs" />
      <Compile Include="Assets\App\Scripts\Libs\SceneManagement\Config\SceneInfo.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\States\SetupLevel\HandlerSetupCameraView.cs" />
@@ -163,7 +165,6 @@
      <Compile Include="Assets\App\Scripts\Libs\BaseView\MonoViewUI.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\GameCore\Models\ContainerUpdatable.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneFillwords\States\StateRestartFillwords.cs" />
-     <Compile Include="Assets\App\Scripts\Libs\FilesLoader\ILoader.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\App\Scripts\Infrastructure\ProjectSettings" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

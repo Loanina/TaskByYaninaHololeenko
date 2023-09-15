@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.GridMatrix;
+using App.Scripts.Scenes.SceneChess.Features.ChessField.Piece;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.Types;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
 {
     public class ChessGridNavigator : IChessGridNavigator
     {
-        private class CellMove
+        public class CellMove
         {
             public Vector2Int Position;
             public CellMove PreviousMove;
@@ -29,7 +30,9 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
         {
             //напиши реализацию не меняя сигнатуру функции
 
-            var color = grid.Get(from).PieceModel.Color;
+            ChessUnitMoveProvider.ChessUnitData chessUnitData;
+            chessUnitData.СhessPieceModel = new ChessPieceModel(unit, grid.Get(from).PieceModel.Color);
+            chessUnitData.СhessGrid = grid; //
 
             Queue<CellMove> movesQueue = new Queue<CellMove>();
             movesQueue.Enqueue(new CellMove(from));
@@ -60,7 +63,9 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
                     return path;
                 }
 
-                List<CellMove> possibleMoves = PossibleChessMoves(color, unit, from, grid, currentMove);
+                // List<CellMove> possibleMoves = PossibleChessMoves(color, unit, from, grid, currentMove);
+                chessUnitData.Position = currentMove.Position;
+                List<CellMove> possibleMoves = PossibleChessMoves(currentMove, chessUnitData);
 
                 foreach (var move in possibleMoves)
                 {
@@ -75,66 +80,20 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             return new List<Vector2Int>();
         }
 
-        private List<CellMove> PossibleChessMoves(ChessUnitColor color, ChessUnitType type, Vector2Int startPosition,
-            ChessGrid grid, CellMove previousMove)
+        private List<CellMove> PossibleChessMoves(CellMove previousMove,
+            ChessUnitMoveProvider.ChessUnitData chessUnitData)
         {
-            var gridSize = grid.Size;
-            var moves = new List<CellMove>();
-            int x;
-            int y;
-            switch (type)
+            List<CellMove> possibleChessMoves = new List<CellMove>();
+            var vectorMoves = new ChessUnitMoveProvider().GetPossibleChessMoves(chessUnitData);
+            
+            if (vectorMoves is null) return null;
+            
+            foreach (var move in vectorMoves)
             {
-                case ChessUnitType.Pon:
-                {
-                    if (color == ChessUnitColor.White)
-                    {
-                        x = startPosition.x;
-                        y = startPosition.y + 1;
-
-                        if (y <= gridSize.y && grid.Get(x, y) == null)
-                        {
-                            moves.Add(new CellMove(new Vector2Int(x, y), previousMove));
-                        }
-                    }
-                    else
-                    {
-                        x = startPosition.x;
-                        y = startPosition.y - 1;
-                        if (y > 0 && grid.Get(x, y) == null)
-                        {
-                            moves.Add(new CellMove(new Vector2Int(x, y), previousMove));
-                        }
-                    }
-
-                    break;
-                }
-                case ChessUnitType.King:
-                {
-                    for (int dx = -1; dx < 2; dx++)
-                    {
-                        for (int dy = -1; dy < 2; dy++)
-                        {
-                            x = startPosition.x + dx;
-                            y = startPosition.y + dy;
-                            if (x <= gridSize.x && y <= gridSize.y &&
-                                grid.Get(x, y) == null && dx + dy != 0)
-                            {
-                                moves.Add(new CellMove(new Vector2Int(x, y), previousMove));
-                            }
-                        }
-                    }
-
-                    break;
-                }
+                possibleChessMoves.Add(new CellMove(move, previousMove));
             }
 
-            /*
-            foreach (var move in moves)
-            {
-                Debug.Log("("+move.position.x+","+move.position.y+")");
-            }
-            */
-            return moves;
+            return possibleChessMoves;
         }
     }
 }
