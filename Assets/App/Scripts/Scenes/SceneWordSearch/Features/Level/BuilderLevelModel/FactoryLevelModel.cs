@@ -20,15 +20,13 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel
 
         private List<char> BuildListChars(List<string> words)
         {
-            //напиши реализацию не меняя сигнатуру функции
-
-            List<char> buildListChars = new List<char>();
+            var buildListChars = new List<char>();
             foreach (var word in words)
             {
-                for (int i = 0; i < word.Length; i++)
+                for (var i = 0; i < word.Length; i++)
                 {
-                    int countLetter = 0;
-                    for (int j = i; j >= 0; j--)
+                    var countLetter = 0;
+                    for (var j = i; j >= 0; j--)
                     {
                         if (word[i] == word[j]) countLetter++;
                     }

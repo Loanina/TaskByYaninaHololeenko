@@ -49,6 +49,7 @@
      <Compile Include="Assets\App\Scripts\Libs\SceneManagement\ISceneNavigator.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\FieldCamera\ViewCamera\ViewCamera.cs" />
      <Compile Include="Assets\App\Scripts\Libs\Installer\MonoInstaller.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\PonState.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\View\ViewField\ViewLetter\FactoryViewLetterButton.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\ProviderChessLevel\IProviderLevelChessInfo.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneFillwords\Installers\InstallerViewFillword.cs" />
@@ -66,9 +67,11 @@
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\ChessField\View\ViewField\ViewGridField.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\LevelContainer\LevelContainer.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\GameCore\States\SetupState\StateSetupLevel.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\IChessUnitState.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneFillwords\Features\ProviderLevel\ProviderFillwordLevel.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneFillwords\Features\FillwordModels\View\ViewGridLetters\AnimatorGridLetters.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Systems\SystemProcessViewSelect.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\KnightState.cs" />
      <Compile Include="Assets\App\Scripts\Libs\Factory\Mono\FactoryMonoPrefab.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\SharedViews\ItemSelector\ButtonItemLabel.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Installers\InstallerChessEntryPoint.cs" />
@@ -94,8 +97,10 @@
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\ChessField\Container\ContainerChessLevel.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\GameCore\Commands\SwitchLevel\CommandSwitchLevelState.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitMoveProvider.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\RookState.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\BuilderLevelModel\ProviderWordLevel\ProviderWordLevel.cs" />
      <Compile Include="Assets\App\Scripts\Libs\SceneManagement\Config\SceneInfo.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\KingState.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\States\SetupLevel\HandlerSetupCameraView.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\LevelSelection\ConfigLevelSelection.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\SpriteProvider\IProviderChessSprite.cs" />
@@ -109,6 +114,7 @@
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\Navigator\ChessGridNavigator.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneWordSearch\States\StateRestartLevel.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\BuilderLevelModel\FactoryLevelModel.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\BishopState.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\SceneManagement\Installer\InstallerSceneManager.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\GameCore\States\SetupState\IHandlerSetupLevel.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\View\ViewField\ViewFieldWord\ViewWord.cs" />
@@ -136,6 +142,7 @@
      <Compile Include="Assets\App\Scripts\Scenes\SceneFillwords\Features\FillwordModels\CharGridModel.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\ChessField\LevelInfo\LevelChessInfo.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\LevelSelection\ServiceLevelSelection.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\QueenState.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Systems\SystemAnimatePieceMove.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\ChessField\LevelInfo\LevelChessPieceInfo.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneFillwords\Installers\InstallerFillwordServices.cs" />
@@ -165,13 +172,6 @@
      <Compile Include="Assets\App\Scripts\Libs\BaseView\MonoViewUI.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\GameCore\Models\ContainerUpdatable.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneFillwords\States\StateRestartFillwords.cs" />
-     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\IChessUnitState.cs" />
-     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\PonState.cs" />
-     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\KingState.cs" />
-     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\QueenState.cs" />
-     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\RookState.cs" />
-     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\KnightState.cs" />
-     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\BishopState.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\App\Scripts\Infrastructure\ProjectSettings" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

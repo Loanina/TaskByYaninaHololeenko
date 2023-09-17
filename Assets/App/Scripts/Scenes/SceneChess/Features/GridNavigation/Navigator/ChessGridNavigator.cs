@@ -12,7 +12,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
         public class CellMove
         {
             public Vector2Int Position;
-            public readonly float Cost;
+            public float Cost;
             public readonly CellMove PreviousMove;
 
             public CellMove(Vector2Int position, float cost)
@@ -51,10 +51,11 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             chessUnitData.СhessGrid = grid;
             chessUnitData.Position = from;
 
-            var startCellMove = new CellMove(from, GetCost(from, to));
+            var chooseAStarAlgoritm = IsAStarAlgoritm(unit);
+            var startCellMove = chooseAStarAlgoritm ? new CellMove(from, GetCostAStar(from, to)) : new CellMove(from, 0);
 
             List<CellMove> waitingCellMoves = new List<CellMove>();
-            waitingCellMoves.AddRange(PossibleChessMoves(startCellMove, chessUnitData, to));
+            waitingCellMoves.AddRange(PossibleChessMoves(startCellMove, chessUnitData, to, chooseAStarAlgoritm));
 
             List<CellMove> checkedCellMoves = new List<CellMove> { startCellMove };
 
@@ -74,11 +75,16 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
                     checkedCellMoves.Add(checkCellMove);
 
                     chessUnitData.Position = checkCellMove.Position;
-                    waitingCellMoves.AddRange(PossibleChessMoves(checkCellMove, chessUnitData, to));
+                    waitingCellMoves.AddRange(PossibleChessMoves(checkCellMove, chessUnitData, to, chooseAStarAlgoritm));
                 }
             }
 
             return null;
+        }
+
+        private bool IsAStarAlgoritm(ChessUnitType type)
+        {
+            return type is ChessUnitType.Pon or ChessUnitType.King or ChessUnitType.Knight;
         }
 
         private List<Vector2Int> CalculateCellMovePath(CellMove cellMove)
@@ -103,13 +109,19 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             return path;
         }
 
-        private float GetCost(Vector2Int cellPosition, Vector2Int targetPosition)
+        //
+        private static float GetCostAStar(Vector2Int cellPosition, Vector2Int targetPosition)
         {
             return Vector2Int.Distance(cellPosition, targetPosition);
         }
 
+        private static float GetCostBfs(CellMove previousMove)
+        {
+            return previousMove.Cost += 1;
+        }
+
         private List<CellMove> PossibleChessMoves(CellMove previousMove,
-            ChessUnitMoveProvider.ChessUnitData chessUnitData, Vector2Int targetPosition)
+            ChessUnitMoveProvider.ChessUnitData chessUnitData, Vector2Int targetPosition, bool chooseAStarAlgoritm)
 
         {
             List<CellMove> possibleChessMoves = new List<CellMove>();
@@ -119,8 +131,14 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
 
             foreach (var move in vectorMoves)
             {
-                possibleChessMoves.Add(new CellMove(move, previousMove,
-                    GetCost(move, targetPosition)));
+                if (chooseAStarAlgoritm)
+                    possibleChessMoves.Add(new CellMove(move, previousMove,
+                        GetCostAStar(move, targetPosition)));
+                else
+                {
+                    possibleChessMoves.Add(new CellMove(move, previousMove,
+                        GetCostBfs(previousMove)));
+                }
             }
 
             return possibleChessMoves;

@@ -7,11 +7,10 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.Pr
     public class ProviderWordLevel : IProviderWordLevel
     {
         private Loader _loader = new Loader();
+
         public LevelInfo LoadLevelData(int levelIndex)
         {
-            //напиши реализацию не меняя сигнатуру функции
-
-            LevelInfo levelInfo =
+            var levelInfo =
                 JsonUtility.FromJson<LevelInfo>(_loader.LoadTextAsset("WordSearch/Levels/" + levelIndex).text);
             return levelInfo;
         }
