@@ -165,6 +165,13 @@
      <Compile Include="Assets\App\Scripts\Libs\BaseView\MonoViewUI.cs" />
      <Compile Include="Assets\App\Scripts\Infrastructure\GameCore\Models\ContainerUpdatable.cs" />
      <Compile Include="Assets\App\Scripts\Scenes\SceneFillwords\States\StateRestartFillwords.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\IChessUnitState.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\PonState.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\KingState.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\QueenState.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\RookState.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\KnightState.cs" />
+     <Compile Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates\BishopState.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\App\Scripts\Infrastructure\ProjectSettings" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -235,6 +242,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
      <Folder Include="Assets\App\Scripts\Scenes\SceneWordSearch\Features\Level\View\ViewField" />
      <None Include="Assets\App\Resources\Fillwords\pack_0.txt" />
+     <Folder Include="Assets\App\Scripts\Scenes\SceneChess\Features\GridNavigation\ChessUnitStates" />
      <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />

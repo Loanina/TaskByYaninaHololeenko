@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.GridMatrix;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.Piece;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.Types;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
@@ -14,17 +12,17 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
         public class CellMove
         {
             public Vector2Int Position;
-            public int Cost;
-            public CellMove PreviousMove;
+            public readonly float Cost;
+            public readonly CellMove PreviousMove;
 
-            public CellMove(Vector2Int position, int cost)
+            public CellMove(Vector2Int position, float cost)
             {
                 Position = position;
                 Cost = cost;
                 PreviousMove = null;
             }
 
-            public CellMove(Vector2Int position, CellMove previousMove, int cost)
+            public CellMove(Vector2Int position, CellMove previousMove, float cost)
             {
                 Position = position;
                 Cost = cost;
@@ -32,10 +30,20 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             }
         }
 
+        private CellMove FindMinCostCellMove(List<CellMove> cellMoves)
+        {
+            var minCostCellMove = cellMoves[0];
+            foreach (var cellMove in cellMoves)
+            {
+                if (cellMove.Cost < minCostCellMove.Cost)
+                    minCostCellMove = cellMove;
+            }
+
+            return minCostCellMove;
+        }
+
         public List<Vector2Int> FindPath(ChessUnitType unit, Vector2Int from, Vector2Int to, ChessGrid grid)
         {
-            //напиши реализацию не меняя сигнатуру функции
-            
             if (from == to) return null;
 
             ChessUnitMoveProvider.ChessUnitData chessUnitData;
@@ -43,17 +51,16 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             chessUnitData.СhessGrid = grid;
             chessUnitData.Position = from;
 
-            var startCellMove = new CellMove(from, GetCost(from, to, from));
+            var startCellMove = new CellMove(from, GetCost(from, to));
 
             List<CellMove> waitingCellMoves = new List<CellMove>();
             waitingCellMoves.AddRange(PossibleChessMoves(startCellMove, chessUnitData, to));
 
-            List<CellMove> checkedCellMoves = new List<CellMove>();
-            checkedCellMoves.Add(startCellMove);
+            List<CellMove> checkedCellMoves = new List<CellMove> { startCellMove };
 
             while (waitingCellMoves.Count > 0)
             {
-                var checkCellMove = waitingCellMoves.Where(x => x.Cost == waitingCellMoves.Min(y => y.Cost)).FirstOrDefault();
+                var checkCellMove = FindMinCostCellMove(waitingCellMoves);
 
                 if (checkCellMove.Position == to)
                 {
@@ -61,8 +68,8 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
                 }
 
                 waitingCellMoves.Remove(checkCellMove);
-                
-                if (!checkedCellMoves.Where(x => x.Position == checkCellMove.Position).Any())
+
+                if (checkedCellMoves.All(x => x.Position != checkCellMove.Position))
                 {
                     checkedCellMoves.Add(checkCellMove);
 
@@ -90,17 +97,15 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
 
             foreach (var vec in path)
             {
-                Debug.Log("("+vec.x+" , "+vec.y+")");
+                Debug.Log("(" + vec.x + " , " + vec.y + ")");
             }
-            
+
             return path;
         }
 
-        private int GetCost(Vector2Int cellPosition, Vector2Int targetPosition, Vector2Int previousPosition)
+        private float GetCost(Vector2Int cellPosition, Vector2Int targetPosition)
         {
-            var previousDistance = previousPosition - cellPosition;
-            var targetDistance = targetPosition - cellPosition;
-            return previousDistance.x + previousDistance.y + targetDistance.x + targetDistance.y;
+            return Vector2Int.Distance(cellPosition, targetPosition);
         }
 
         private List<CellMove> PossibleChessMoves(CellMove previousMove,
@@ -110,12 +115,12 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             List<CellMove> possibleChessMoves = new List<CellMove>();
             var vectorMoves = ChessUnitMoveProvider.GetPossibleChessMoves(chessUnitData);
 
-            if (vectorMoves is null) return null;
+            if (vectorMoves is null) return possibleChessMoves;
 
             foreach (var move in vectorMoves)
             {
                 possibleChessMoves.Add(new CellMove(move, previousMove,
-                    GetCost(move, targetPosition, previousMove.Position)));
+                    GetCost(move, targetPosition)));
             }
 
             return possibleChessMoves;
