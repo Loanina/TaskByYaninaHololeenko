@@ -18,24 +18,18 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation
             //доделать сруктуру для получения данных
         }
 
-        public List<Vector2Int> GetPossibleChessMoves(ChessUnitData chessUnitData)
+        public static List<Vector2Int> GetPossibleChessMoves(ChessUnitData chessUnitData)
         {
             ChessUnitContext chessUnitContext;
             var pieceType = chessUnitData.СhessPieceModel.PieceType;
-            switch (pieceType)
+            chessUnitContext = pieceType switch
             {
-                case ChessUnitType.Pon:
-                    chessUnitContext = new ChessUnitContext(new PonState());
-                    break;
-                case ChessUnitType.King:
-                    chessUnitContext = new ChessUnitContext(new KingState());
-                    break;
-                default:
-                    chessUnitContext = null;
-                    break;
-            }
+                ChessUnitType.Pon => new ChessUnitContext(new PonState()),
+                ChessUnitType.King => new ChessUnitContext(new KingState()),
+                _ => null
+            };
 
-            return chessUnitContext.GetPossibleMoves(chessUnitData); //допустимо null что делать
+            return chessUnitContext?.GetPossibleMoves(chessUnitData); //допустимо null что делать
         }
 
         public interface IChessUnitState

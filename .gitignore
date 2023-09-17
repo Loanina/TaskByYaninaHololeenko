@@ -1,2 +1,16 @@
 
 Library/PackageCache/com.unity.burst@1.6.6/.Runtime/hostmac/lld
+/.idea/*
+/[Ll]ibrary/*
+/[Ll]ogs/*
+/[Oo]bj/*
+/[Tt]emp/*
+/[Bb]ins
+/[Uu]serSettings/
+*.csproj
+*.sln
+*.apk
+*.zip
+*.keystore
+*.DS_Store
+

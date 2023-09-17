@@ -42,11 +42,11 @@ namespace App.Scripts.Scenes.SceneChess.Systems
         {
             var grid = _containerChessLevel.Grid;
             var piece = grid.Get(move.From);
+            move.ChessUnit = piece;
             var pathCells = _chessGridNavigator.FindPath(piece.PieceModel.PieceType, move.From, move.To, grid);
             if (pathCells is null) return;
 
             move.Path = pathCells;
-            move.ChessUnit = piece;
             grid.Move(move.From, move.To);
 
             ClearSelection();

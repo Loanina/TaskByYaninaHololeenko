@@ -45,6 +45,7 @@ namespace App.Scripts.Scenes.SceneChess.Systems
         {
             var path = new List<Vector3>();
 
+            if (movePath is null) return path;
             foreach (var cell in movePath)
             {
                 Vector3 point = _gridField.GetCellPosition(cell);

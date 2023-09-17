@@ -108,7 +108,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
 
         {
             List<CellMove> possibleChessMoves = new List<CellMove>();
-            var vectorMoves = new ChessUnitMoveProvider().GetPossibleChessMoves(chessUnitData);
+            var vectorMoves = ChessUnitMoveProvider.GetPossibleChessMoves(chessUnitData);
 
             if (vectorMoves is null) return null;
 
