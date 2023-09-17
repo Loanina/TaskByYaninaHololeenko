@@ -16,17 +16,11 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
 
             var levelsTextAsset = _loader.LoadTextAsset("Fillwords/pack_0");
             if (levelsTextAsset is null)
-            {
-                Debug.Log("Fillwords levels are null");
                 return null;
-            }
 
             var wordsTextAsset = _loader.LoadTextAsset("Fillwords/words_list");
             if (wordsTextAsset is null)
-            {
-                Debug.Log("Fillwords words list is null");
                 return null;
-            }
 
             var levelInfo = levelsTextAsset.text.Split('\n')[index - 1].Split(' ');
 

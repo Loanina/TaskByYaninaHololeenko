@@ -6,7 +6,7 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.Pr
 {
     public class ProviderWordLevel : IProviderWordLevel
     {
-        private Loader _loader = new Loader();
+        private readonly Loader _loader = new Loader();
 
         public LevelInfo LoadLevelData(int levelIndex)
         {

@@ -52,7 +52,8 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             chessUnitData.Position = from;
 
             var chooseAStarAlgoritm = IsAStarAlgoritm(unit);
-            var startCellMove = chooseAStarAlgoritm ? new CellMove(from, GetCostAStar(from, to)) : new CellMove(from, 0);
+            var startCellMove =
+                chooseAStarAlgoritm ? new CellMove(from, GetCostAStar(from, to)) : new CellMove(from, 0);
 
             List<CellMove> waitingCellMoves = new List<CellMove>();
             waitingCellMoves.AddRange(PossibleChessMoves(startCellMove, chessUnitData, to, chooseAStarAlgoritm));
@@ -70,13 +71,12 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
 
                 waitingCellMoves.Remove(checkCellMove);
 
-                if (checkedCellMoves.All(x => x.Position != checkCellMove.Position))
-                {
-                    checkedCellMoves.Add(checkCellMove);
+                if (checkedCellMoves.Any(x => x.Position == checkCellMove.Position)) continue;
+                checkedCellMoves.Add(checkCellMove);
 
-                    chessUnitData.Position = checkCellMove.Position;
-                    waitingCellMoves.AddRange(PossibleChessMoves(checkCellMove, chessUnitData, to, chooseAStarAlgoritm));
-                }
+                chessUnitData.Position = checkCellMove.Position;
+                waitingCellMoves.AddRange(PossibleChessMoves(checkCellMove, chessUnitData, to,
+                    chooseAStarAlgoritm));
             }
 
             return null;
@@ -101,15 +101,9 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             path.Reverse();
             path.RemoveAt(0);
 
-            foreach (var vec in path)
-            {
-                Debug.Log("(" + vec.x + " , " + vec.y + ")");
-            }
-
             return path;
         }
 
-        //
         private static float GetCostAStar(Vector2Int cellPosition, Vector2Int targetPosition)
         {
             return Vector2Int.Distance(cellPosition, targetPosition);
