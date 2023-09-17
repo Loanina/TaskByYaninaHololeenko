@@ -79,7 +79,6 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation
             {
                 List<Vector2Int> moves = new List<Vector2Int>();
                 var grid = chessUnitData.СhessGrid;
-                Debug.Log(grid.Size.x+" "+grid.Size.y);
                 for (int dx = -1; dx < 2; dx++)
                 {
                     for (int dy = -1; dy < 2; dy++)

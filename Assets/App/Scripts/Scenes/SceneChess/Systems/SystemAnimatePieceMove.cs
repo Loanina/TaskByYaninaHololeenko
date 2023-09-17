@@ -36,6 +36,8 @@ namespace App.Scripts.Scenes.SceneChess.Systems
 
         private void AnimateMove(MoveRequest move)
         {
+            if (move.ChessUnit is null) Debug.Log("move is null");
+            
             move.ChessUnit.View.AnimateMove(GetAnimationPath(move.Path));
         }
 
