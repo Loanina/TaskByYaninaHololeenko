@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: InputConfig
   m_EditorClassIdentifier: 
   JoystickRadius: 150
-  RotationSensitivity: 0.3
+  RotationSensitivity: 0.1
