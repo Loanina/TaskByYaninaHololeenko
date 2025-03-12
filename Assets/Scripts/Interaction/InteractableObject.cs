@@ -2,13 +2,14 @@
 
 namespace Interaction
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class InteractableObject : MonoBehaviour, IInteractable
     {
-        private Rigidbody rb;
+        [SerializeField] private Rigidbody rb;
 
         private void Awake()
         {
-            rb = GetComponent<Rigidbody>();
+            if (rb == null) rb = GetComponent<Rigidbody>();
         }
 
         public void PickUp(Transform parent)
