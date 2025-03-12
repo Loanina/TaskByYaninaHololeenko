@@ -1,16 +1,34 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Input
 {
-    public class JoystickInput
+    public class JoystickInput : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
     {
-        public float Horizontal { get; private set; }
-        public float Vertical { get; private set; }
+        [SerializeField] private RectTransform joystickBackground;
+        [SerializeField] private RectTransform joystickHandle;
+        [SerializeField] private float joystickRadius = 100f;
 
-        public void UpdateInput(Vector2 input)
+        private Vector2 inputVector = Vector2.zero;
+
+        public Vector2 InputVector => inputVector;
+
+        public void OnPointerDown(PointerEventData eventData)
         {
-            Horizontal = input.x;
-            Vertical = input.y;
+            OnDrag(eventData);
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            Vector2 direction = eventData.position - (Vector2)joystickBackground.position;
+            inputVector = Vector2.ClampMagnitude(direction / joystickRadius, 1f);
+            joystickHandle.anchoredPosition = inputVector * joystickRadius;
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            inputVector = Vector2.zero;
+            joystickHandle.anchoredPosition = Vector2.zero;
         }
     }
 }

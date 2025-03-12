@@ -21,7 +21,7 @@ namespace Player
 
         public void Tick()
         {
-            var move = new Vector3(joystickInput.Horizontal, 0, joystickInput.Vertical);
+            var move = new Vector3(joystickInput.InputVector.x, 0, joystickInput.InputVector.y);
             rb.velocity = transform.TransformDirection(move) * config.MoveSpeed;
         }
     }
