@@ -12,16 +12,15 @@ namespace Installers
         [SerializeField] private Transform playerTransform;
         [SerializeField] private Camera playerCamera;
         [SerializeField] private PlayerConfig playerConfig;
+        [SerializeField] private InputConfig inputConfig;
         [SerializeField] private InteractionConfig interactionConfig;
-
-        [SerializeField] private JoystickInput joystickInput;
-        [SerializeField] private LookInput lookInput;
+        [SerializeField] private MultiTouchInput multiTouchInput;
 
         public override void InstallBindings()
         {
-            Container.Bind<JoystickInput>().FromInstance(joystickInput).AsSingle();
-            Container.Bind<LookInput>().FromInstance(lookInput).AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerMovement>().AsSingle().WithArguments(playerRb, playerConfig, playerTransform);
+            Container.Bind<InputConfig>().FromInstance(inputConfig).AsSingle();
+            Container.Bind<MultiTouchInput>().FromInstance(multiTouchInput).AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerMovement>().AsSingle().WithArguments(playerRb, playerTransform, playerCamera.transform, playerConfig);
             Container.Bind<InteractionHandler>().AsSingle().WithArguments(playerCamera, interactionConfig);
         }
     }
