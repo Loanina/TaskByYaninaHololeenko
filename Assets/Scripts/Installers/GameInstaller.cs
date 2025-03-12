@@ -16,15 +16,9 @@ namespace Installers
 
         public override void InstallBindings()
         {
-            Container.BindInstance(playerConfig).AsSingle();
-            Container.BindInstance(interactionConfig).AsSingle();
-            Container.BindInstance(playerRb).AsSingle();
-            Container.BindInstance(playerTransform).AsSingle();
-            Container.BindInstance(playerCamera).AsSingle();
-
             Container.Bind<JoystickInput>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerMovement>().AsSingle();
-            Container.Bind<InteractionHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerMovement>().AsSingle().WithArguments(playerRb, playerConfig, playerTransform);
+            Container.Bind<InteractionHandler>().AsSingle().WithArguments(playerCamera, interactionConfig);
         }
     }
 }
