@@ -6,7 +6,7 @@ namespace Interaction
     public class InteractableObject : MonoBehaviour, IInteractable
     {
         [SerializeField] private Rigidbody rb;
-
+        [SerializeField, Range(0f, 30f)] private float yOffsetFromCamera = 0;
         private void Awake()
         {
             if (rb == null) rb = GetComponent<Rigidbody>();
@@ -16,7 +16,7 @@ namespace Interaction
         {
             rb.isKinematic = true;
             transform.SetParent(parent);
-            transform.localPosition = Vector3.zero;
+            transform.localPosition = new Vector3(0, yOffsetFromCamera, 0);
         }
 
         public void Drop(Vector3 force)

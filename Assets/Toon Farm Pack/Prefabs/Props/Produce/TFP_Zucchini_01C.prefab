@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8826603900877542805}
   - component: {fileID: 2216345914776760503}
   - component: {fileID: 8066945053942733576}
-  - component: {fileID: 1447803208593564637}
   m_Layer: 0
   m_Name: TFP_Zucchini_01C
   m_TagString: Untagged
@@ -32,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8497343157226514295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -169,17 +168,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b441f67ccdde4716b959f8f63de326aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
---- !u!114 &1447803208593564637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8497343157226514295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b441f67ccdde4716b959f8f63de326aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 2216345914776760503}

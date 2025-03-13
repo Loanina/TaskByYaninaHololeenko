@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d86de6ac12949249592dc1bfc9e5a44, type: 3}
   m_Name: InteractionConfig
   m_EditorClassIdentifier: 
-  PickupRange: 2
+  PickupRange: 8
   DropForce: 5

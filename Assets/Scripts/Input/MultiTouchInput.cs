@@ -73,7 +73,6 @@ namespace Input
                     out Vector2 localPoint
                 );
 
-                // Учитываем Pivot (0.5, 0.5)
                 Vector2 direction = localPoint - joystickRectTransform.rect.center;
                 direction = Vector2.ClampMagnitude(direction, _inputConfig.JoystickRadius);
         

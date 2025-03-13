@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 350695371079242110}
   - component: {fileID: 1331501375650152247}
   - component: {fileID: 5537524874106165387}
-  - component: {fileID: 8456856148998168881}
+  - component: {fileID: 1188949347413407564}
   m_Layer: 0
   m_Name: Pumkin
   m_TagString: Untagged
@@ -154,7 +154,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8456856148998168881
+--- !u!114 &1188949347413407564
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,4 +166,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b441f67ccdde4716b959f8f63de326aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 5537524874106165387}
