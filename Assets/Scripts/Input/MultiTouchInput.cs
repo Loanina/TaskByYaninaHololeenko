@@ -73,8 +73,12 @@ namespace Input
                     out Vector2 localPoint
                 );
 
-                _joystickInput = Vector2.ClampMagnitude(localPoint / _inputConfig.JoystickRadius, 1f);
-                joystickHandle.anchoredPosition = _joystickInput * _inputConfig.JoystickRadius;
+                // Учитываем Pivot (0.5, 0.5)
+                Vector2 direction = localPoint - joystickRectTransform.rect.center;
+                direction = Vector2.ClampMagnitude(direction, _inputConfig.JoystickRadius);
+        
+                _joystickInput = direction / _inputConfig.JoystickRadius;
+                joystickHandle.anchoredPosition = direction;
             }
             else if (touch.fingerId == _rotationTouchId)
             {
