@@ -14,6 +14,7 @@ namespace Interaction
 
         public void PickUp(Transform parent)
         {
+            gameObject.layer = LayerMask.NameToLayer("HeldObject");
             rb.isKinematic = true;
             transform.SetParent(parent);
             transform.localPosition = new Vector3(0, yOffsetFromCamera, 0);
@@ -21,6 +22,7 @@ namespace Interaction
 
         public void Drop(Vector3 force)
         {
+            gameObject.layer = LayerMask.NameToLayer("Default");
             transform.SetParent(null);
             rb.isKinematic = false;
             rb.AddForce(force, ForceMode.Impulse);
