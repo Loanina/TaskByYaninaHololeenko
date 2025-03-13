@@ -4359,6 +4359,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFP_Apple_Crate_Large_Mixed_01A
       objectReference: {fileID: 0}
+    - target: {fileID: 7413947851142190828, guid: 5fd8c1e6febbb524b99c8d6c797add13,
+        type: 3}
+      propertyPath: yOffsetFromCamera
+      value: -1.11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

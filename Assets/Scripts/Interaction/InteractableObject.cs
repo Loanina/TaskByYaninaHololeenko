@@ -6,7 +6,7 @@ namespace Interaction
     public class InteractableObject : MonoBehaviour, IInteractable
     {
         [SerializeField] private Rigidbody rb;
-        [SerializeField, Range(0f, 30f)] private float yOffsetFromCamera = 0;
+        [SerializeField, Range(-10f, 30f)] private float yOffsetFromCamera = 0;
         private void Awake()
         {
             if (rb == null) rb = GetComponent<Rigidbody>();

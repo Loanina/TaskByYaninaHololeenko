@@ -378,3 +378,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5222213578034608484}
+  yOffsetFromCamera: -0.61
