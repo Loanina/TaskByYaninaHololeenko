@@ -29,22 +29,9 @@ namespace Interaction
             if (heldObject != null) return;
 
             RaycastHit hit;
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit,
-                    config.PickupRange))
-            {
-                if (hit.transform.TryGetComponent(out IInteractable interactable))
-                {
-                    OnLookAtInteractable?.Invoke(true);
-                }
-                else
-                {
-                    OnLookAtInteractable?.Invoke(false);
-                }
-            }
-            else
-            {
-                OnLookAtInteractable?.Invoke(false);
-            }
+            OnLookAtInteractable?.Invoke(Physics.Raycast(playerCamera.transform.position,
+                playerCamera.transform.forward, out hit,
+                config.PickupRange) && hit.transform.TryGetComponent(out IInteractable interactable));
         }
 
         public void TryPickup()
@@ -64,12 +51,10 @@ namespace Interaction
 
         public void DropItem()
         {
-            if (heldObject != null)
-            {
-                heldObject.Drop(playerCamera.transform.forward * config.DropForce);
-                heldObject = null;
-                OnObjectDrop?.Invoke();
-            }
+            if (heldObject == null) return;
+            heldObject.Drop(playerCamera.transform.forward * config.DropForce);
+            heldObject = null;
+            OnObjectDrop?.Invoke();
         }
     }
 }

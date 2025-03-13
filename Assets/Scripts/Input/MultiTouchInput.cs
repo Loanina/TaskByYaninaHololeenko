@@ -8,16 +8,16 @@ namespace Input
         [SerializeField] private RectTransform joystickRectTransform;
         [SerializeField] private RectTransform joystickHandle;
 
-        private Vector2 _joystickInput;
-        private int _joystickTouchId = -1;
-        private int _rotationTouchId = -1;
+        private Vector2 joystickInput;
+        private int joystickTouchId = -1;
+        private int rotationTouchId = -1;
 
-        private InputConfig _inputConfig;
+        private InputConfig inputConfig;
 
         [Inject]
         public void Construct(InputConfig inputConfig)
         {
-            _inputConfig = inputConfig;
+            this.inputConfig = inputConfig;
         }
 
         public System.Action<Vector2> OnJoystickUpdate;
@@ -42,29 +42,29 @@ namespace Input
                 }
             }
 
-            OnJoystickUpdate?.Invoke(_joystickInput);
+            OnJoystickUpdate?.Invoke(joystickInput);
         }
 
         private void HandleTouchBegan(Touch touch)
         {
-            bool isJoystickArea = RectTransformUtility.RectangleContainsScreenPoint(
+            var isJoystickArea = RectTransformUtility.RectangleContainsScreenPoint(
                 joystickRectTransform,
                 touch.position
             );
 
-            if (isJoystickArea && _joystickTouchId == -1)
+            if (isJoystickArea && joystickTouchId == -1)
             {
-                _joystickTouchId = touch.fingerId;
+                joystickTouchId = touch.fingerId;
             }
-            else if (!isJoystickArea && _rotationTouchId == -1)
+            else if (!isJoystickArea && rotationTouchId == -1)
             {
-                _rotationTouchId = touch.fingerId;
+                rotationTouchId = touch.fingerId;
             }
         }
 
         private void HandleTouchMoved(Touch touch)
         {
-            if (touch.fingerId == _joystickTouchId)
+            if (touch.fingerId == joystickTouchId)
             {
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(
                     joystickRectTransform,
@@ -73,33 +73,33 @@ namespace Input
                     out Vector2 localPoint
                 );
 
-                Vector2 direction = localPoint - joystickRectTransform.rect.center;
-                direction = Vector2.ClampMagnitude(direction, _inputConfig.JoystickRadius);
+                var direction = localPoint - joystickRectTransform.rect.center;
+                direction = Vector2.ClampMagnitude(direction, inputConfig.JoystickRadius);
         
-                _joystickInput = direction / _inputConfig.JoystickRadius;
+                joystickInput = direction / inputConfig.JoystickRadius;
                 joystickHandle.anchoredPosition = direction;
             }
-            else if (touch.fingerId == _rotationTouchId)
+            else if (touch.fingerId == rotationTouchId)
             {
-                Vector2 delta = touch.deltaPosition * _inputConfig.RotationSensitivity;
+                var delta = touch.deltaPosition * inputConfig.RotationSensitivity;
                 OnRotationUpdate?.Invoke(delta);
             }
         }
 
         private void HandleTouchEnded(Touch touch)
         {
-            if (touch.fingerId == _joystickTouchId)
+            if (touch.fingerId == joystickTouchId)
             {
-                _joystickTouchId = -1;
-                _joystickInput = Vector2.zero;
+                joystickTouchId = -1;
+                joystickInput = Vector2.zero;
                 joystickHandle.anchoredPosition = Vector2.zero;
             }
-            else if (touch.fingerId == _rotationTouchId)
+            else if (touch.fingerId == rotationTouchId)
             {
-                _rotationTouchId = -1;
+                rotationTouchId = -1;
             }
         }
 
-        public Vector2 GetJoystickInput() => _joystickInput;
+        public Vector2 GetJoystickInput() => joystickInput;
     }
 }

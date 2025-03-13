@@ -46,12 +46,12 @@ namespace Player
 
         public void Tick()
         {
-            Vector2 input = touchInput.GetJoystickInput();
+            var input = touchInput.GetJoystickInput();
 
             if (input.magnitude > 0)
             {
-                Vector3 move = new Vector3(input.x, 0, input.y);
-                Vector3 globalMove = playerTransform.TransformDirection(move);
+                var move = new Vector3(input.x, 0, input.y);
+                var globalMove = playerTransform.TransformDirection(move);
                 rb.velocity = new Vector3(
                     globalMove.x * config.MoveSpeed,
                     rb.velocity.y,
