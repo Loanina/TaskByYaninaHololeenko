@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: InteractionConfig
   m_EditorClassIdentifier: 
   PickupRange: 20
-  DropForce: 5
+  DropForce: 7
