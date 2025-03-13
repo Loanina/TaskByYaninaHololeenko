@@ -47,7 +47,10 @@ namespace Input
 
         private void HandleTouchBegan(Touch touch)
         {
-            bool isJoystickArea = RectTransformUtility.RectangleContainsScreenPoint(joystickRectTransform, touch.position);
+            bool isJoystickArea = RectTransformUtility.RectangleContainsScreenPoint(
+                joystickRectTransform,
+                touch.position
+            );
 
             if (isJoystickArea && _joystickTouchId == -1)
             {
@@ -63,8 +66,14 @@ namespace Input
         {
             if (touch.fingerId == _joystickTouchId)
             {
-                Vector2 direction = touch.position - (Vector2)joystickRectTransform.position;
-                _joystickInput = Vector2.ClampMagnitude(direction / _inputConfig.JoystickRadius, 1f);
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    joystickRectTransform,
+                    touch.position,
+                    null,
+                    out Vector2 localPoint
+                );
+
+                _joystickInput = Vector2.ClampMagnitude(localPoint / _inputConfig.JoystickRadius, 1f);
                 joystickHandle.anchoredPosition = _joystickInput * _inputConfig.JoystickRadius;
             }
             else if (touch.fingerId == _rotationTouchId)
@@ -88,9 +97,6 @@ namespace Input
             }
         }
 
-        public Vector2 GetJoystickInput()
-        {
-            return _joystickInput;
-        }
+        public Vector2 GetJoystickInput() => _joystickInput;
     }
 }

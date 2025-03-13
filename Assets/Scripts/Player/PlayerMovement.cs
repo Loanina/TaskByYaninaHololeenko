@@ -50,15 +50,19 @@ namespace Player
 
             if (input.magnitude > 0)
             {
-                var move = new Vector3(input.x, 0, input.y);
+                Vector3 move = new Vector3(input.x, 0, input.y);
                 Vector3 globalMove = playerTransform.TransformDirection(move);
-                rb.velocity = new Vector3(globalMove.x * config.MoveSpeed, rb.velocity.y, globalMove.z * config.MoveSpeed);
+                rb.velocity = new Vector3(
+                    globalMove.x * config.MoveSpeed,
+                    rb.velocity.y,
+                    globalMove.z * config.MoveSpeed
+                );
             }
             else
             {
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
             }
-
+            
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * config.RotationSmoothing));
         }
     }
